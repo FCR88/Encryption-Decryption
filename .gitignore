@@ -1,0 +1,45 @@
+target
+classes
+bin
+*.log
+dist
+node_modules
+Main2.java
+
+# Eclipse
+.classpath
+.project
+.settings
+.metadata
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea
+build
+out
+generated
+MANIFEST.MF
+
+#gradle
+gradle
+.gradle
+
+### Maven ###
+target/
+log/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
+
+#angular
+node_modules
+
