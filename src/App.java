@@ -2,43 +2,54 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-//        String textToEncrypt = "welcome to hyperskill";
+//        operation = "enc";
+//        String textToEncrypt = "welcome to hyperskill!";
 //        int key = 5;
-        //output of encrypted text: bjqhtrj yt mdujwxpnqq
+//        output of encrypted text: |jqhtrj%yt%m~ujwxpnqq&
 
         Scanner sc = new Scanner(System.in);
 
-        String textToEncrypt = sc.nextLine();
+        //operation can be: enc or dec
+        String operation = sc.nextLine();
+        String textToBeProcessed = sc.nextLine();
         int key = sc.nextInt();
 
-        String encryptedText = encryptString(textToEncrypt, key);
+        String result = encryptDecryptString(operation, textToBeProcessed, key);
 
-        System.out.println(textToEncrypt);
-        System.out.println(encryptedText);
+        System.out.println(textToBeProcessed);
+        System.out.println(result);
     }
 
-    static String encryptString(String textToEncrypt, int key) {
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    static String encryptDecryptString(String operation, String textToBeProcessed, int key) {
+        //accepted alphabet characters:  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+        String alphabet = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-        // if key is 5 encoded alphabet looks like this: "fghijklmnopqrstuvwxyzabcde"
+        //ex.: if key is 5 encoded alphabet looks like this: "%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ !"#$"
         String encodedAlphabet = alphabet.substring(key) + alphabet.substring(0, key);
 
-        StringBuilder encryptedText = new StringBuilder();
+//        System.out.println(alphabet);
+//        System.out.println(encodedAlphabet);
 
-        for (int idx = 0; idx < textToEncrypt.length(); idx++) {
-            char ch = textToEncrypt.charAt(idx);
-            char encodedChar;
+        StringBuilder result = new StringBuilder();
 
-            //we check for other characters besides those in alphabet and
-            // if found add them directly as they are to the encoded string:
-            if (alphabet.contains(String.valueOf(ch))) {
-                int charAlphabetIdx = alphabet.indexOf(ch);
-                encodedChar = encodedAlphabet.charAt(charAlphabetIdx);
-            } else {
-                encodedChar = ch;
+        if (operation.equals("enc")) {
+            for (char c : textToBeProcessed.toCharArray()) {
+                int idxOfCharInAlphabet = alphabet.indexOf(c);
+
+                // add encodedChar to the result:
+                result.append(encodedAlphabet.charAt(idxOfCharInAlphabet));
             }
-            encryptedText.append(encodedChar);
+        } else if (operation.equals("dec")) {
+            for (char c : textToBeProcessed.toCharArray()) {
+                int idxOfCharInEncodedAlphabet = encodedAlphabet.indexOf(c);
+
+                // add decodedChar to the result:
+                result.append(alphabet.charAt(idxOfCharInEncodedAlphabet));
+            }
+
+        } else {
+            throw new IllegalArgumentException("Illegal operation type!");
         }
-        return String.valueOf(encryptedText);
+        return String.valueOf(result);
     }
 }
