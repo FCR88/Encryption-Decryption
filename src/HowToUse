@@ -1,0 +1,53 @@
+The compiled EncDec program expects various arguments to be passed to it in command line:
+
+-mode:(default : enc)
+-mode enc   #encrypts the current input
+-mode dec   #decrypts the current input
+
+-key: (default : dec)
+-key 3  #sets the key to 3 for current run
+
+-data: (default "")
+-data "Hello Java"  #"Hello Java" will be processed(encrypted or decrypted in regard with -mode parameter setting)
+
+#If there is no -data, and there is no -in the program assumes that the data is an empty string.
+
+-in:    #points to the file to be used as input for the program(instead of -data)
+-in road_to_treasure.txt
+
+-out:   #points to the file to be used as output for the program(instead of printing the output to the console when -out is not present)
+-out protected.txt
+
+========================================================================================================================================================================
+Usage examples:
+========================================================================================================================================================================
+
+Example 1
+Input:
+java EncDec -mode enc -in road_to_treasure.txt -out protected.txt -key 5
+
+Output results:
+This command must get data from the file road_to_treasure.txt, encrypt the data with the key 5, create a file called protected.txt and write ciphered text to it.
+
+Related info:
+java EncDec -mode dec -in protected.txt -key 5 #prints the decrypted text from protected.txt file: As you know X marks the spot! Lets go there!
+========================================================================================================================================================================
+
+Example 2
+
+Input:
+java EncDec -mode enc -key 5 -data "Welcome to the pleasure dome!"
+Output:
+\jqhtrj%yt%ymj%uqjfxzwj%itrj&
+========================================================================================================================================================================
+
+Example 3
+
+Input:
+
+java EncDec -key 5 -data "\jqhtrj%yt%ymj%uqjfxzwj%itrj&" -mode dec
+Output:
+Welcome to the pleasure dome!
+========================================================================================================================================================================
+road_to_treasure.txt and protected.txt are just input and output example files generated for and with the program.
+they can be deleted or customized as the user wishes.
